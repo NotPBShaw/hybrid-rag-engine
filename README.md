@@ -11,7 +11,7 @@ Hybrid RAG pipeline that combines structured filters with semantic retrieval.
 
 ## Why this exists
 
-This project is part of the SomaOS ecosystem and focuses on reliable, production-oriented building blocks for AI workflows.
+Open-source building block for production AI workflows.
 
 ## Quickstart
 
