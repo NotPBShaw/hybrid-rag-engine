@@ -2,40 +2,46 @@
 
 Structured filters plus semantic retrieval in one RAG pipeline.
 
-![CI](https://github.com/TryKosm/hybrid-rag-engine/actions/workflows/ci.yml/badge.svg)
-
-Hybrid RAG pipeline that combines structured filters with semantic retrieval.
-
-[![CI](https://github.com/TryKosm/hybrid-rag-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/TryKosm/hybrid-rag-engine/actions/workflows/ci.yml)
+[![CI](https://github.com/NotPBShaw/hybrid-rag-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/NotPBShaw/hybrid-rag-engine/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+Combine metadata filters with vector ranking to narrow candidates before semantic search.
 
 ## Why this exists
 
-Open-source building block for production AI workflows.
+Pure vector search ignores structured constraints; pure SQL misses semantic similarity. Hybrid retrieval applies both in one call.
 
 ## Quickstart
 
-
-tbd
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -e .
+pytest -q
+```
 
 ## Usage
 
-Add a concise runnable example for the main workflow in this repository.
+```python
+from hybrid_rag.pipeline import hybrid_retrieve
+
+rows = [{"team": "platform", "doc": "runbook-a"}]
+docs = ["restart procedure", "incident escalation"]
+result = hybrid_retrieve({"team": "platform"}, rows, "restart", docs)
+print(result["structured"], result["semantic"])
+```
 
 ## Architecture
 
-Document the core components and data flow for this project.
-
-## Roadmap
-
-- [ ] Stabilize v0.1 contract and improve docs
-- [ ] Expand test coverage and CI signals
-- [ ] Add one benchmark or reliability metric
+- `schema_search.py` — structured filter pass over tabular rows
+- `vector_search.py` — semantic ranking over document strings
+- `pipeline.py` — orchestrates both passes and returns merged results
 
 ## Development
 
-- Run tests locally before opening a PR.
-- Keep changes scoped and update docs for API/behavior changes.
+```bash
+make check
+pytest -q
+```
 
 ## License
 
